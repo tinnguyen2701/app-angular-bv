@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, VERSION } from '@angular/core';
+import { UserService } from './user.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
-  `,
-  styles: [],
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: [ './app.component.css' ]
 })
-export class AppComponent {
-  title = 'app-angular-bv';
+export class AppComponent  {
+  name = 'Angular ' + VERSION.major;
+  constructor(public userService: UserService) {}
+
+  toggleRole() {
+    this.userService.currentUser.isAdmin = !this.userService.currentUser.isAdmin;
+  }
 }
